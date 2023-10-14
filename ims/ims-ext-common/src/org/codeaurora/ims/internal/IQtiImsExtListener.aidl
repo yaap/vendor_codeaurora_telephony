@@ -24,6 +24,10 @@
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear.
  */
 
 package org.codeaurora.ims.internal;
@@ -192,4 +196,37 @@ oneway interface IQtiImsExtListener {
      */
    void queryCallBarringResponse(in int[] response);
 
+   /** Notifies client on exit of SCBM
+     * @return void.
+     */
+   void onScbmExited(boolean status);
+
+   /** Notifies client on data channel capability
+     * @param phoneId indicates the phone instance which triggered the request
+     * @param dcCapability
+     *        if true  : has data channel capability
+     *        if false : no data channel capability
+     * @return void.
+     */
+   void notifyDataChannelCapability(int phoneId, boolean dcCapability);
+
+    /**
+     * Notifies client the result of send vos support status
+     *
+     * @param phoneId indicates the phone instance which triggered the request
+     * @param <result> is one of the values QTI_IMS_REQUEST_*, as defined in
+     *        <code>org.codeaurora.ims.utils.QtiImsExtUtils.</code>
+     * @return void.
+     */
+    void handleSendVosSupportStatusResponse(int phoneId, int result);
+
+    /**
+     * Notifies client the result of send vos action info
+     *
+     * @param phoneId indicates the phone instance which triggered the request
+     * @param <result> is one of the values QTI_IMS_REQUEST_*, as defined in
+     *        <code>org.codeaurora.ims.utils.QtiImsExtUtils.</code>
+     * @return void.
+     */
+    void handleSendVosActionInfoResponse(int phoneId, int result);
 }

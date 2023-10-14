@@ -27,13 +27,23 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+/*
+ * Changes from Qualcomm Innovation Center are provided under the following license:
+ *
+ * Copyright (c) 2022-2023 Qualcomm Innovation Center, Inc. All rights reserved.
+ * SPDX-License-Identifier: BSD-3-Clause-Clear
+ */
+
 package com.qti.extphone;
 
 import android.os.RemoteException;
+import android.telephony.CellInfo;
 import android.util.Log;
 import com.qti.extphone.BearerAllocationStatus;
 import com.qti.extphone.DcParam;
+import com.qti.extphone.DualDataRecommendation;
 import com.qti.extphone.IExtPhoneCallback;
+import com.qti.extphone.NetworkSelectionMode;
 import com.qti.extphone.NrConfig;
 import com.qti.extphone.NrConfigType;
 import com.qti.extphone.NrIconType;
@@ -42,6 +52,7 @@ import com.qti.extphone.SignalStrength;
 import com.qti.extphone.Status;
 import com.qti.extphone.Token;
 import com.qti.extphone.UpperLayerIndInfo;
+import java.util.List;
 
 public class ExtPhoneCallbackBase extends IExtPhoneCallback.Stub {
     private static final String TAG = "ExtPhoneCallbackBase";
@@ -110,6 +121,11 @@ public class ExtPhoneCallbackBase extends IExtPhoneCallback.Stub {
                 " token = " + token + " status" + status + " raf = " + raf);
     }
 
+    @Override
+    public void getQosParametersResponse(int slotId, Token token, Status status,
+                QosParametersResult result) throws RemoteException {
+    }
+
     public void onNrDcParam(int slotId, Token token, Status status, DcParam dcParam) throws
             RemoteException {
         Log.d(TAG, "UNIMPLEMENTED: onNrDcParam: slotId = " + slotId +
@@ -164,5 +180,114 @@ public class ExtPhoneCallbackBase extends IExtPhoneCallback.Stub {
     public void setSmartDdsSwitchToggleResponse(Token token, boolean result) throws
             RemoteException {
         Log.d(TAG, "setSmartDdsSwitchToggleResponse: token = " + token +  " result = " + result);
+    }
+
+    @Override
+    public void onImeiTypeChanged(QtiImeiInfo[] imeiInfo) throws RemoteException {
+    }
+
+    public void onSendUserPreferenceForDataDuringVoiceCall(int slotId, Token token,
+            Status status) throws RemoteException {
+    }
+
+    @Override
+    public void onDdsSwitchCapabilityChange(int slotId, Token token, Status status,
+            boolean support) throws RemoteException {
+    }
+
+    @Override
+    public void onDdsSwitchCriteriaChange(int slotId, boolean telephonyDdsSwitch)
+            throws RemoteException {
+    }
+
+    @Override
+    public void onDdsSwitchRecommendation(int slotId,
+            int recommendedSlotId) throws RemoteException {
+    }
+
+    @Override
+    public void onDataDeactivateDelayTime(int slotId, long delayTimeMilliSecs)
+            throws RemoteException {
+    }
+
+    @Override
+    public void onEpdgOverCellularDataSupported(int slotId, boolean support)
+            throws RemoteException {
+    }
+
+    @Override
+    public void getSecureModeStatusResponse(Token token, Status status, boolean enableStatus)
+            throws RemoteException {
+    }
+
+    @Override
+    public void onSecureModeStatusChange(boolean enabled) throws RemoteException {
+    }
+
+    @Override
+    public void startNetworkScanResponse(int slotId, Token token, int errorCode) throws
+            RemoteException {
+    }
+
+    @Override
+    public void stopNetworkScanResponse(int slotId, Token token, int errorCode) throws
+            RemoteException {
+    }
+
+    @Override
+    public void setNetworkSelectionModeManualResponse(int slotId, Token token, int errorCode) throws
+            RemoteException {
+    }
+
+    @Override
+    public void setNetworkSelectionModeAutomaticResponse(int slotId, Token token,
+            int errorCode) throws RemoteException {
+    }
+
+    @Override
+    public void getNetworkSelectionModeResponse(int slotId, Token token, Status status,
+            NetworkSelectionMode modes) throws RemoteException {
+    }
+
+    @Override
+    public void networkScanResult(int slotId, Token token, int status, int error,
+            List<CellInfo> cellInfos) throws RemoteException {
+    }
+
+    @Override
+    public void setMsimPreferenceResponse(Token token, Status status) throws RemoteException {
+    }
+
+    @Override
+    public void onQosParametersChanged(int slotId, int cid, QosParametersResult result)
+            throws RemoteException {
+    }
+
+    @Override
+    public void setSimTypeResponse(Token token, Status status) throws RemoteException {
+    }
+
+    @Override
+    public void onSimTypeChanged(QtiSimType[] simtype) throws RemoteException {
+    }
+
+    @Override
+    public void onDualDataCapabilityChanged(Token token, Status status, boolean support)
+            throws RemoteException {
+    }
+
+    @Override
+    public void setDualDataUserPreferenceResponse(Token token, Status status)
+            throws RemoteException {
+    }
+
+    @Override
+    public void onDualDataRecommendation(DualDataRecommendation rec)
+            throws RemoteException {
+    }
+
+    @Override
+    public void onSimPersoUnlockStatusChange(int slotId, QtiPersoUnlockStatus persoUnlockStatus)
+            throws RemoteException {
     }
 }
